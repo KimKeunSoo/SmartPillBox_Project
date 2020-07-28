@@ -1,0 +1,8 @@
+JavaScript:
+    beautifiers: ["Prettier"]
+    indent_style: "space"
+    indent_size: 2
+TypeScript:
+    beautifiers: ["Prettier"]
+    indent_style: "space"
+    indent_size: 2
