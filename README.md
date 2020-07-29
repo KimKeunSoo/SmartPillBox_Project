@@ -457,21 +457,41 @@ sudo git clone  https://github.com/KimKeunSoo/SmartPillBox
 sudo npm install
 ```
 
-`SmartPillBox\assets\config.json` 파일의 IP부분을 전과 똑같이 해당 MQTT 브로커의 공인 IP로 수정해줍니다.
- 
+
+
+`SmartPillBox\assets\config.json` 파일의 IP부분을 전과 똑같이 해당 MQTT 브로커서버의 공인 IP로 수정해줍니다.
+
+
+
+**환경 설정을 완료한 Client[2]에서 Subscribe를 해줍니다.**
+
+ `dist/sub`파일을 node로 실행시켜 줍니다. 
 
 ```bash
 node \dist\sub
 ```
 
+![image-20200729164012799](README%20assets/image-20200729164012799.png)
+
+완료되었다는 문자가 나오면 잘 실행된 상태입니다.
 
 
 
-
-`SmartPillBox\assets\config.json` 파일의 IP부분을 보시면 MQTT 브로커의 공인 IP가 있습니다.(여기서는 Client[1]안에 브로커 서버를 두므로 127.0.0.1) 
-각자의 환경에 맞게 해당 공인 IP로 수정하시면 됩니다.  수정한 뒤에 `pub.js`파일을 실행시킵니다.
+**환경 설정을 완료한 Client[1]에서 Publish를 해줍니다.**
 
 ```bash
 node \dist\pub
 ```
+
+![image-20200729164423495](README%20assets/image-20200729164423495.png)
+
+연결완료와 메시지 전송이 완료되었다는 문자가 나오면 잘 실행된 상태입니다.
+
+
+
+
+
+**Client[2]에서 Client[1]에게 받은 메시지를 출력함을 잘 확인할 수 있습니다.**
+
+![image-20200729164138853](README%20assets/image-20200729164138853.png)
 
