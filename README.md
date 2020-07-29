@@ -2,13 +2,13 @@
 
 
 
-- Docker를 활용하여 공유기 아래에 Mosquitto MQTT 브로커 서버를 두어 공인 IP Host와 사설 IP Host간의 Typescript 기반 스마트 약상자 MQTT 통신 구현을 목표로 합니다.
-- 먼저 사용법과 환경설정을 설명하고, 이를 기반으로 구현에 필요한 파일을 다운받아 진행하는 단계로 시작합니다.
+- Docker를 활용하여 공유기 아래에 Mosquitto MQTT 브로커 서버를 두어 Typescript 기반 스마트 약상자 MQTT 통신 구현을 목표로 합니다.
+- 먼저 사용법과 환경설정을 설명하고, 이를 기반으로 현재까지는(200728) 공인 IP Host와 사설 IP Host간의 통신 구현의 단계들로 구성합니다.
   
 
 **< Environment >**
 
-**•OS : Windows (64-bit)**
+**•OS :  Client[1] : Windows (64-bits), Client[2] : Ubuntu IoT (64-bits)**
 
 **•Nodejs : 12.18.3v**
 
@@ -290,7 +290,159 @@ tsc --init
 
 
 
-## <3> 업로드된 파일로 구현해보기
+## <3> 환경 설정
 
-이제 본격적으로 구현된 MQTT 통신을 구현해봅니다. https://github.com/KimKeunSoo/SmartPillBox에서 Code를 다운받아 압축을 푼 뒤,  VSCode에서 작업 폴더 추가로 SmartPillBox를 띄웁니다.
+이제 본격적으로 구현된 MQTT 통신을 구현해봅니다.
+
+
+
+**먼저, 사설 IP를 사용하며 MQTT 브로커 서버인 Mosquitto이 실행되고 Subscribe역할을 할 Client[2]의 Ubuntu IoT의 환경을 구축해줍니다.**
+
+
+
+우선 최신 버전으로 패키지를 `update`, `upgrade`를 차례대로 해줍니다.
+
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+
+
+curl 등 Docker에 필요한 패키지를 다운받습니다.
+
+```bash
+sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg-agent     software-properties-common 
+```
+
+
+
+PPA를 추가해줍니다.
+
+```bash
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+```
+
+
+
+Nodejs를 설치해줍니다.
+
+```bash
+sudo apt-get install -y nodejs
+```
+
+
+
+PPA를 통해서 NodeJS를 설치하면 NodeJS 뿐만 아니라 npm도 같이 설치됩니다. 하지만 npm install시 에러가 나는 것을 방지하여 build-essential을 설치해줍니다.
+
+```bash
+sudo apt-get install build-essential
+```
+
+
+
+Doker를 사용하기 위한 다운로드와 설정을 해줍니다.
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository    "deb [arch=arm64] https://download.docker.com/linux/ubuntu \    $(lsb_release -cs) \ stable"  
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+
+
+최종적으로 다시 한번 `update`와 `upgrade`를 해줍니다.
+
+```bash
+sudo apt-get update
+sudo apt upgrade
+```
+
+
+
+Doker를 실행시켜 줍니다.
+
+```bash
+sudo docker run -it -p 1883:1883 -p 9001:9001 eclipse-mosquitto  
+```
+
+
+
+실행중인 Doker를 확인할 수 있습니다.
+
+```bash
+sudo docker container ls -a 
+```
+
+
+
+실행중인 Doker를 중지시킬 수도 있습니다.
+
+```bash
+sudo docker container stop <Container ID>
+```
+
+
+
+Doker를 다시 실행하며 Doker의 이름을 별도로 지정할 수도 있습니다.
+
+```bash
+sudo docker run -it -p 1883:1883 -p 9001:9001 --name JeyunBroker eclipse-mosquitto
+```
+
+
+
+별도로 지정한 이름으로 시작 및 중지시킬 수도 있습니다.
+
+```bash
+sudo docker container start JeyunBroker
+sudo docker container stop JeyunBroker
+```
+
+
+
+Doker로 MQTT 브로커 서버인 Mosquitto를 실행시켜둔 뒤에, 다음은 공유기단의 LAN -  DHCP 서버 설정페이지로 들어가 DHCP리스트에서 수동으로 IP를 임의로 할당해주고 기억해둡니다.  (제조사마다 다름)
+
+
+
+git clone으로 소스코드를 가져옵니다. 
+
+```bash
+sudo git clone  https://github.com/KimKeunSoo/SmartPillBox
+```
+
+
+
+`SmartPillBox`에 들어가서 필요한 module들을 가져옵니다. 정상적으로 완료되면 `node_modules`폴더가 생김을 알 수 있습니다.
+
+```bash
+sudo npm install
+```
+
+
+
+`SmartPillBox\assets\config.json` 파일의 IP부분을 보시면 저의 고정 사설 IP는 192.168.50.123이지만 기억해두신 IP로 수정하시면 됩니다.  수정한 뒤에 `sub.js`파일을 실행시킵니다.
+
+```bash
+node \dist\sub
+```
+
+
+
+
+
+**다음으로 공인 IP를 사용하며 Publish역할을 할 Client[1]의 Windows OS의 환경구축을 해줍니다.**
+
+ https://github.com/KimKeunSoo/SmartPillBox에서 파일을 다운받아 압축을 푼 뒤, VSCode를 실행시켜 해당 폴더를 작업폴더로 추가시켜둡니다. 위에 설명한것과 같이 `SmartPillBox\assets\config.json`파일의 IP부분을 고정 IP로 수정하시고 VSCode에서 터미널을 열어
+
+```
+node dist/pub
+```
+
+위 명령어를 입력합니다. 
+
+
+
+
 
