@@ -8,7 +8,7 @@
 
 **< Environment >**
 
-**•OS :  Client[1] : Windows (64-bits), Client[2] : Ubuntu IoT (64-bits)**
+**•OS :  Client[1] : Ubuntu IoT (64-bits) with 공인IP , Client[2] : Ubuntu IoT (64-bits) with 사설IP **
 
 **•Nodejs : 12.18.3v**
 
@@ -296,7 +296,9 @@ tsc --init
 
 
 
-**먼저, 사설 IP를 사용하며 MQTT 브로커 서버인 Mosquitto이 실행되고 Subscribe역할을 할 Client[2]의 Ubuntu IoT의 환경을 구축해줍니다.**
+**먼저, 공인 IP를 사용하며 MQTT 브로커 서버인 Mosquitto을 실행하면서 Publish역할을 할 Client[1]의 Ubuntu IoT의 환경을 구축해줍니다.**
+
+
 
 
 
@@ -422,7 +424,41 @@ sudo npm install
 
 
 
-`SmartPillBox\assets\config.json` 파일의 IP부분을 보시면 저의 고정 사설 IP는 192.168.50.123이지만 기억해두신 IP로 수정하시면 됩니다.  수정한 뒤에 `sub.js`파일을 실행시킵니다.
+
+
+**다음으로 사설 IP를 사용하며 Subscribe역할을 할 Client[2]의 Ubuntu IoT OS의 환경구축을 해줍니다.**
+
+
+
+우선 전과 같의 단계와 같이 순서대로 입력해줍니다.
+
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+```bash
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+```
+
+```bash
+sudo apt-get install -y nodejs
+```
+
+```bash
+sudo apt-get install build-essential
+```
+
+```bash
+sudo git clone  https://github.com/KimKeunSoo/SmartPillBox
+```
+
+```bash
+sudo npm install
+```
+
+`SmartPillBox\assets\config.json` 파일의 IP부분을 전과 똑같이 해당 MQTT 브로커의 공인 IP로 수정해줍니다.
+ 
 
 ```bash
 node \dist\sub
@@ -432,17 +468,10 @@ node \dist\sub
 
 
 
-**다음으로 공인 IP를 사용하며 Publish역할을 할 Client[1]의 Windows OS의 환경구축을 해줍니다.**
+`SmartPillBox\assets\config.json` 파일의 IP부분을 보시면 MQTT 브로커의 공인 IP가 있습니다.(여기서는 Client[1]안에 브로커 서버를 두므로 127.0.0.1) 
+각자의 환경에 맞게 해당 공인 IP로 수정하시면 됩니다.  수정한 뒤에 `pub.js`파일을 실행시킵니다.
 
- https://github.com/KimKeunSoo/SmartPillBox에서 파일을 다운받아 압축을 푼 뒤, VSCode를 실행시켜 해당 폴더를 작업폴더로 추가시켜둡니다. 위에 설명한것과 같이 `SmartPillBox\assets\config.json`파일의 IP부분을 고정 IP로 수정하시고 VSCode에서 터미널을 열어
-
+```bash
+node \dist\pub
 ```
-node dist/pub
-```
-
-위 명령어를 입력합니다. 
-
-
-
-
 

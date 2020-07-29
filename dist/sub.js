@@ -5,15 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt_1 = __importDefault(require("mqtt"));
 const params = require("../assets/config.json");
-const client = mqtt_1.default.connect("mqtt://192.168.50.123");
+const client = mqtt_1.default.connect("mqtt://" + params["IP"]);
 client.on("connect", function () {
     client.subscribe(params["topic"], function (err) {
-        console.log("sub");
+        console.log("subscribe completed!");
     });
 });
 client.on("message", function (topic, message) {
     // message is Buffer
-    console.log(message.toString());
+    console.log("Message from Public : %s", message.toString());
     //   client.end();
 });
 //# sourceMappingURL=sub.js.map

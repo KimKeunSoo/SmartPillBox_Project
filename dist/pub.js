@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt_1 = __importDefault(require("mqtt"));
-const client = mqtt_1.default.connect("mqtt://192.168.50.123");
 const params = require("../assets/config.json");
+const client = mqtt_1.default.connect("mqtt://" + params["IP"]);
 (async function main() {
     let test = await new Promise((resolve, reject) => {
         client.on("connect", function () {
@@ -21,6 +21,7 @@ const params = require("../assets/config.json");
         console.log("Connected!!");
     }
     client.publish(params["topic"], params["message"]);
+    console.log("Message are sent!");
     client.end();
 })();
 //# sourceMappingURL=pub.js.map

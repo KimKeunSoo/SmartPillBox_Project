@@ -1,7 +1,7 @@
 import mqtt from "mqtt";
 
-const client = mqtt.connect("mqtt://192.168.50.123");
 const params = require("../assets/config.json");
+const client = mqtt.connect("mqtt://" + params["IP"]);
 
 (async function main() {
   let test = await new Promise((resolve, reject) => {
@@ -19,5 +19,6 @@ const params = require("../assets/config.json");
   }
       
   client.publish(params["topic"], params["message"]);
+  console.log("Message are sent!")
   client.end()
 })();
