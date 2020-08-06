@@ -1,4 +1,4 @@
-import mqtt from "mqtt";
+import mqtt, { connect } from "mqtt";
 
 const params = require("../assets/config.json");
 const client = mqtt.connect("mqtt://" + params["IP"]);
@@ -10,15 +10,21 @@ const client = mqtt.connect("mqtt://" + params["IP"]);
     });
   });
 
-//   console.log(test)
+
   if (test !== "Connected!!") {
     console.log("Cannot Connect.")
     client.end()
   } else {
     console.log("Connected!!");
   }
-      
+
+  console.log("%s", client.options.clientId);
+
+
   client.publish(params["topic"], params["message"]);
+
+
   console.log("Message are sent!")
   client.end()
 })();
+

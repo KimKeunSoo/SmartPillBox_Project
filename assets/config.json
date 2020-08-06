@@ -1,5 +1,5 @@
 {
     "topic" : "tempTopic",
     "message" : "Hi, I'm Public IP",
-    "IP" : "192.168.50.123"
+    "IP" : "test.mosquitto.org"
 }

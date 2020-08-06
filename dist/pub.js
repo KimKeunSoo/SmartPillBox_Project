@@ -12,7 +12,6 @@ const client = mqtt_1.default.connect("mqtt://" + params["IP"]);
             resolve("Connected!!");
         });
     });
-    //   console.log(test)
     if (test !== "Connected!!") {
         console.log("Cannot Connect.");
         client.end();
@@ -20,6 +19,7 @@ const client = mqtt_1.default.connect("mqtt://" + params["IP"]);
     else {
         console.log("Connected!!");
     }
+    console.log("%s", client.options.clientId);
     client.publish(params["topic"], params["message"]);
     console.log("Message are sent!");
     client.end();

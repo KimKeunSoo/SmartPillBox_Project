@@ -1,7 +1,7 @@
-import mqtt from "mqtt";
+import {connect} from "mqtt";
 
 const params = require("../assets/config.json");
-const client = mqtt.connect("mqtt://" + params["IP"]);
+const client = connect("mqtt://" + params["IP"]);
 
 client.on("connect", function () {
   client.subscribe(params["topic"], function (err) {
@@ -10,7 +10,7 @@ client.on("connect", function () {
 });
 
 client.on("message", function (topic, message) {
-  // message is Buffer
+
   console.log("Message from Public : %s",message.toString());
 //   client.end();
 });

@@ -3,20 +3,24 @@
 
 
 - Docker를 활용하여 공유기 아래에 Mosquitto MQTT 브로커 서버를 두어 Typescript 기반 스마트 약상자 MQTT 통신 구현을 목표로 합니다.
-- 먼저 사용법과 환경설정을 설명하고, 이를 기반으로 현재까지는(200728) 공인 IP Host와 사설 IP Host간의 통신 구현의 단계들로 구성합니다.
+- 먼저 생소할 수 있는 Typescript 사용법과 환경설정을 설명하고, 이를 기반으로 현재까지는(200728) 공인 IP Host와 사설 IP Host간의 통신 구현의 단계들로 구성합니다.
   
+
+
 
 **< Environment >**
 
-**•OS :  Client[1] : Ubuntu IoT (64-bits) with 공인IP , Client[2] : Ubuntu IoT (64-bits) with 사설IP **
+**•OS : Ubuntu IoT (64-bit) 20.04 LTS version**
 
-**•Nodejs : 12.18.3v**
+**•Nodejs : 12.18.3 version**
 
-**•npm : 6.14.6v**
+**•tsc : 3.9.7 version**
 
-**•tsc : 3.9.7v**
+**•ts-node : 8.10.2 version**
 
-**•ts-node : 8.10.2v**
+**•npm : 6.14.6 version**
+
+**•mosquitto : 1.6.10 version**
 
 
 
