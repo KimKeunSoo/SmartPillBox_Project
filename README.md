@@ -300,7 +300,7 @@ tsc --init
 
 
 
-**먼저, 공인 IP를 사용하며 MQTT 브로커 서버인 Mosquitto을 실행하면서 Publish역할을 할 Client[1]의 Ubuntu IoT의 환경을 구축해줍니다.**
+**먼저, 공인 IP를 사용하며 MQTT 브로커 서버인 Mosquitto을 실행하면서 ControlTower|Hospital|Doctor역할을 할 Client[1]의 Ubuntu IoT의 환경을 구축해줍니다.**
 
 
 
@@ -430,7 +430,7 @@ sudo npm install
 
 
 
-**다음으로 사설 IP를 사용하며 Subscribe역할을 할 Client[2]의 Ubuntu IoT OS의 환경구축을 해줍니다.**
+**다음으로 사설 IP를 사용하며 SmartPillBox 역할을 할 Client[2]의 Ubuntu IoT OS의 환경구축을 해줍니다.**
 
 
 
@@ -463,7 +463,7 @@ sudo npm install
 
 
 
-`SmartPillBox\assets\config.json` 파일의 IP부분을 전과 똑같이 해당 MQTT 브로커서버의 공인 IP로 수정해줍니다.
+`SmartPillBox\assets\config.json` 파일의 IP부분을 전과 똑같이 해당 MQTT 브로커서버의 공인 IP, 즉 Client[1]의 IP주소로 수정해줍니다.
 
 
 
