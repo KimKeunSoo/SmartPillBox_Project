@@ -1,0 +1,5 @@
+{
+    "topic" : "service/smartpillbox/001",
+    "message" : "Hi, I'm Public IP",
+    "IP" : "test.mosquitto.org"
+}

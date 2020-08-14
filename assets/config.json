@@ -1,5 +1,8 @@
 {
-    "topic" : "tempTopic",
-    "message" : "Hi, I'm Public IP",
-    "IP" : "test.mosquitto.org"
+    "broker": {
+        "ip": "192.168.50.123",
+        "port": -1
+    },
+    "topics_sub": ["service/smartpillbox/001", "service/control_tower"],
+    "topic_pub": "service/control_tower"
 }
