@@ -1,7 +1,9 @@
 #  OpenLab_Project - 제윤 메디컬 x 경북대학교 IoT 표준화 연구실
 
 
+프로젝트 이전 - MQTT_based_NAT_relay_program (완료, 설명 추가 안함)
 
+-----------------------------------------------------------
 - Docker를 활용하여 공유기 아래에 Mosquitto MQTT 브로커 서버를 두어 Typescript 기반 스마트 약상자 MQTT 통신 구현을 목표로 합니다.
 - 먼저 생소할 수 있는 Typescript 사용법과 환경설정을 설명하고, 이를 기반으로 현재까지는(200728) 공인 IP Host와 사설 IP Host간의 통신 구현의 단계들로 구성합니다.
   
