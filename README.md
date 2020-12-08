@@ -474,7 +474,7 @@ sudo npm install
  `dist/sub`파일을 node로 실행시켜 줍니다. 
 
 ```bash
-node /dist/sub
+node .\dist\sub
 ```
 
 ![image-20200729164012799](README%20assets/image-20200729164012799.png)
@@ -486,7 +486,7 @@ node /dist/sub
 **환경 설정을 완료한 Client[1]에서 Publish를 해줍니다.**
 
 ```bash
-node /dist/pub
+node .\dist\pub
 ```
 
 ![image-20200729164423495](README%20assets/image-20200729164423495.png)
